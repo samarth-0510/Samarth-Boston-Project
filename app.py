@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
-
+import os
 app = Flask(__name__)
 
 with open('house_price_prediction.pkl','rb') as f:
@@ -38,4 +38,6 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+   
+    port = int(os.environ.get("PORT", 5000))  # Use Render's assigned port or default to 5000
+    app.run(host='0.0.0.0', port=port)
